@@ -11,4 +11,4 @@ out_path = './SYNTHIA-PANO/PREDICTIONS/seqs02_fall/'
 files = [f for f in listdir(base_path) if isfile(join(base_path, f))]
 
 for file in files:
-    out = model.predict_segmentation(inp=f'{base_path}{file}', out_fname=f'{out_path}{file}')
+    out = model.predict_segmentation(inp=f'{base_path}{file}', out_fname=f'{out_path}{file.replace("_pano", "_label")}')

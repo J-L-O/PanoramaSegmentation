@@ -1,11 +1,11 @@
 from os import listdir
 from os.path import isfile, join
 from PIL import Image
-from cvt2color import cvt2color
-import numpy as np
+
+from ConvertColors import convert_colors
 
 base_path = './SYNTHIA-PANO/PREDICTIONS/seqs02_fall/'
-out_path = './SYNTHIA-PANO/PREDICTIONS_Converted/seqs02_fall/'
+out_path = './SYNTHIA-PANO/PREDICTIONS_Converted_Color/seqs02_fall/'
 
 color_dict_CITYSCAPES_to_SYNTHIA_color = {
     (20, 215, 197): (128, 64, 128),  # road -> road
@@ -33,6 +33,5 @@ files = [f for f in listdir(base_path) if isfile(join(base_path, f))]
 
 for file in files:
     img = Image.open(f'{base_path}{file}')
-    out = cvt2color(np.array(img), color_dict=color_dict_CITYSCAPES_to_SYNTHIA_color)
-    converted = Image.fromarray(out)
+    converted = convert_colors(img, color_dict_CITYSCAPES_to_SYNTHIA_color)
     converted.save(f'{out_path}{file}')

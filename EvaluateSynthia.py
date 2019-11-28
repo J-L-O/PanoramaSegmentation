@@ -1,11 +1,43 @@
-from os import listdir
-from os.path import isfile, join
+from PIL import Image
+from keras_segmentation.data_utils.data_loader import get_pairs_from_paths
+from tqdm import tqdm
+import numpy as np
 
-from keras_segmentation.pretrained import pspnet_101_cityscapes
 
-model = pspnet_101_cityscapes()  # load the pretrained model trained on Cityscapes dataset
+labels_path = './SYNTHIA-PANO/LABELS/seqs02_fall/'
+predictions_path = './SYNTHIA-PANO/Labels_test/seqs02_fall/'
 
-base_path = './SYNTHIA-PANO/RGB/seqs02_fall/'
-out_path = './SYNTHIA-PANO/PREDICTIONS/seqs02_fall/'
 
-print(model.evaluate_segmentation(inp_images_dir="dataset1/images_prepped_test/", annotations_dir="dataset1/annotations_prepped_test/"))
+def evaluate(inp_images_dir, annotations_dir, n_classes):
+
+    paths = get_pairs_from_paths(inp_images_dir, annotations_dir)
+    paths = list(zip(*paths))
+    inp_images = list(paths[0])
+    annotations = list(paths[1])
+
+    tp = np.zeros(n_classes)
+    fp = np.zeros(n_classes)
+    fn = np.zeros(n_classes)
+    n_pixels = np.zeros(n_classes)
+
+    for inp, ann in tqdm(zip(inp_images, annotations)):
+        pr = np.array(Image.open(inp))
+        gt = np.array(Image.open(ann))
+
+        pr = pr.flatten()
+        gt = gt.flatten()
+
+        for cl_i in range(n_classes):
+            tp[cl_i] += np.sum((pr == cl_i) * (gt == cl_i))
+            fp[cl_i] += np.sum((pr == cl_i) * (gt != cl_i))
+            fn[cl_i] += np.sum((pr != cl_i) * (gt == cl_i))
+            n_pixels[cl_i] += np.sum(gt == cl_i)
+
+    cl_wise_score = tp / (tp + fp + fn + 0.000000000001)
+    n_pixels_norm = n_pixels / np.sum(n_pixels)
+    frequency_weighted_IU = np.sum(cl_wise_score * n_pixels_norm)
+    mean_IU = np.mean(cl_wise_score)
+    return {"frequency_weighted_IU": frequency_weighted_IU, "mean_IU": mean_IU, "class_wise_IU": cl_wise_score}
+
+
+print(evaluate(inp_images_dir=predictions_path, annotations_dir=labels_path, n_classes=16))
