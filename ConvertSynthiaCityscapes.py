@@ -30,5 +30,5 @@ files = [f for f in listdir(base_path) if isfile(join(base_path, f))]
 
 for file in files:
     img = Image.open(f'{base_path}{file}').convert('L')
-    converted = convert_colors(img, color_dict_SYNTHIA_label_to_color)
+    converted = convert_colors(img, color_dict_SYNTHIA_label_to_color, True)
     converted.save(f'{out_path}{file}')

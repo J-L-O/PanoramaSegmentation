@@ -33,5 +33,5 @@ files = [f for f in listdir(base_path) if isfile(join(base_path, f))]
 
 for file in files:
     img = Image.open(f'{base_path}{file}')
-    converted = convert_colors(img, color_dict_CITYSCAPES_to_SYNTHIA_color)
+    converted = convert_colors(img, color_dict_CITYSCAPES_to_SYNTHIA_color, True)
     converted.save(f'{out_path}{file}')

@@ -15,8 +15,8 @@ def convert_colors(img, color_dict, rgb=True):
     for color in color_dict:
         white_areas = data == color
 
-        # if not rgb:
-        white_areas = white_areas[:, :, 0]
+        if len(data.shape) != 2:
+            white_areas = white_areas[:, :, 0]
 
         temp[white_areas] = color_dict[color]
 
