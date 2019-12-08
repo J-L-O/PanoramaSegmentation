@@ -4,8 +4,8 @@ from PIL import Image
 
 from ConvertColors import convert_colors
 
-base_path = './SYNTHIA-PANO/LABELS/seqs02_fall/'
-out_path = './SYNTHIA-PANO/LABELS_Converted/seqs02_fall/'
+base_path = './SYNTHIA-PANO/PREDICTIONS_Converted_Labels/seqs02_fall/'
+out_path = './SYNTHIA-PANO/PREDICTIONS_Converted_Color/seqs02_fall/'
 
 color_dict_SYNTHIA_label_to_color = {
     0: (0, 0, 0),  # void
