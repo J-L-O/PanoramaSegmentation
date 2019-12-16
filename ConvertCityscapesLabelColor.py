@@ -1,4 +1,4 @@
-from ConvertColors import convert_colors
+from convert import convert_colors
 
 base_path = './SYNTHIA-PANO/PREDICTIONS/seqs02_fall/'
 out_path = './SYNTHIA-PANO/PREDICTIONS_Converted_Labels/seqs02_fall/'

@@ -6,8 +6,8 @@ import numpy as np
 
 
 @click.command()
-@click.option('--predictions', '-p', default='./SYNTHIA-PANO/LABELS/seqs02_fall/', help='The folder containing the predicted segmentation.', type=click.Path(exists=True))
-@click.option('--ground_truth', '-gt', default='./SYNTHIA-PANO/PREDICTIONS_Converted_Labels/seqs02_fall/', help='The folder containing the ground truth segmentation.', type=click.Path(exists=True))
+@click.option('--predictions', '-p', default='./SYNTHIA-PANO/PREDICTIONS_Converted_Labels/seqs02_fall/', help='The folder containing the predicted segmentation.', type=click.Path(exists=True))
+@click.option('--ground_truth', '-gt', default='./SYNTHIA-PANO/LABELS/seqs02_fall/', help='The folder containing the ground truth segmentation.', type=click.Path(exists=True))
 @click.option('--n_classes', '-gt', default=16, help='The number of classes.', type=int)
 def evaluate(predictions, ground_truth, n_classes):
 

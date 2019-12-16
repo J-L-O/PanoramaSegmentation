@@ -2,10 +2,13 @@ from os import listdir
 from os.path import isfile, join
 from PIL import Image
 
-from ConvertColors import convert_colors
+from convert import convert_colors
 
-base_path = './SYNTHIA-PANO/PREDICTIONS/seqs02_fall/'
-out_path = './SYNTHIA-PANO/PREDICTIONS_Converted_Labels/seqs02_fall/'
+# input = './SYNTHIA-PANO/PREDICTIONS/seqs02_fall/'
+# output = './SYNTHIA-PANO/PREDICTIONS_Converted_Labels/seqs02_fall/'
+
+base_path = './panoramabilder/Langenbeckerstr_Predictions/Trained_473x473/'
+out_path = './panoramabilder/Langenbeckerstr_Predictions/Trained_473x473_Labels/'
 
 color_dict_SYNTHIA_color_to_Label = {
     (20, 215, 197): 0,  # void
