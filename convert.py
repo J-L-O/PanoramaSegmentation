@@ -133,11 +133,11 @@ CITYSCAPES_Color_to_SYNTHIA_Color = {
     (46, 227, 147): (0, 128, 192),  # bicycle -> bicycle
 }
 
-color_dicts = {'SYNTHIA_Color_to_SYNTHIA_Label': SYNTHIA_Color_to_SYNTHIA_Label,
-               'SYNTHIA_Label_to_SYNTHIA_Color': SYNTHIA_Label_to_SYNTHIA_Color,
-               'CITYSCAPES_Label_to_CITYSCAPES_Color': CITYSCAPES_Label_to_CITYSCAPES_Color,
-               'CITYSCAPES_Color_to_SYNTHIA_Label': CITYSCAPES_Color_to_SYNTHIA_Label,
-               'CITYSCAPES_Color_to_SYNTHIA_Color': CITYSCAPES_Color_to_SYNTHIA_Color}
+color_dicts = {'SYNTHIA_Color_to_SYNTHIA_Label': (SYNTHIA_Color_to_SYNTHIA_Label, False),
+               'SYNTHIA_Label_to_SYNTHIA_Color': (SYNTHIA_Label_to_SYNTHIA_Color, True),
+               'CITYSCAPES_Label_to_CITYSCAPES_Color': (CITYSCAPES_Label_to_CITYSCAPES_Color, True),
+               'CITYSCAPES_Color_to_SYNTHIA_Label': (CITYSCAPES_Color_to_SYNTHIA_Label, False),
+               'CITYSCAPES_Color_to_SYNTHIA_Color': (CITYSCAPES_Color_to_SYNTHIA_Color, True)}
 
 
 @click.command()
@@ -149,7 +149,7 @@ def convert(input, output, conversion):
 
     for file in files:
         img = Image.open(f'{input}{file}')
-        converted = convert_colors(img, color_dicts[conversion], False)
+        converted = convert_colors(img, color_dicts[conversion][0], color_dicts[conversion][1])
         converted.save(f'{output}{file}')
 
 
