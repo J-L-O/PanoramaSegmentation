@@ -40,7 +40,7 @@ def predict_pretrained_croppped(model, inp, out_fname, box=(0, 110, 3340, 650)):
 @click.command()
 @click.option('--images', '-i', default='./SYNTHIA-PANO/RGB/seqs02_fall/', help='The folder containing the images.', type=click.Path(exists=True))
 @click.option('--predictions', '-p', default='./SYNTHIA-PANO/PREDICTIONS/seqs02_fall/', help='Where to store the predicted segmentation.', type=click.Path(exists=True))
-@click.option('--pretrained/--from-checkpoint', default=True, help='Whether or not to use a pretrained model.', type=bool)
+@click.option('--pretrained/--from-checkpoint', default=True, help='Whether or not to use a pretrained model.')
 @click.option('--checkpoint_dir', help='Location of the model checkpoints. Only used with option --from-checkpoint.', type=click.Path(exists=True))
 def predict(images, predictions, pretrained, checkpoint_dir):
 
