@@ -21,7 +21,7 @@ def train_pspnet_101(images, labels, width, height):
     model.train(
         train_images=images,
         train_annotations=labels,
-        checkpoints_path=f'{checkpoint_directory}/pspnet101_{width}x{height}', epochs=5, batch_size=1
+        checkpoints_path=f'{checkpoint_directory}/pspnet101_{width}x{height}', epochs=10, batch_size=1
     )
 
     return model
