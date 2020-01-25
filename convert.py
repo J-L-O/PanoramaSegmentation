@@ -42,7 +42,7 @@ SYNTHIA_Color_to_SYNTHIA_Label = {
     (31, 133, 226): 9,  # traffic sign
     (204, 47, 7): 10,  # pedestrian
     (170, 252, 0): 11,  # bicycle
-    (32, 166, 124): 12,  # landmarking
+    (32, 166, 124): 12,  # lanemarking
     (122, 113, 97): 13,  # void
     (46, 229, 72): 14,  # void
     (250, 163, 41): 15  # traffic light
@@ -61,10 +61,43 @@ SYNTHIA_Label_to_SYNTHIA_Color = {
     9: (192, 128, 128),  # traffic sign
     10: (64, 64, 0),  # pedestrian
     11: (0, 128, 192),  # bicycle
-    12: (0, 172, 0),  # landmarking
+    12: (0, 172, 0),  # lanemarking
     13: (0, 0, 0),  # void
     14: (0, 0, 0),  # void
     15: (0, 128, 128)  # traffic light
+}
+
+SYNTHIA_Label_to_REDUCED_Label = {
+    0: 0,  # void -> void
+    1: 1,  # sky -> sky
+    2: 2,  # building -> building
+    3: 3,  # road -> road
+    4: 4,  # sidewalk -> sidewalk
+    5: 5,  # fence -> fence
+    6: 6,  # vegetation -> vegetation
+    7: 7,  # pole -> sign
+    8: 8,  # car -> car
+    9: 7,  # traffic sign -> sign
+    10: 9,  # pedestrian -> person
+    11: 9,  # bicycle -> person
+    12: 10,  # lanemarking -> lanemarking
+    13: 0,  # void -> void
+    14: 0,  # void -> void
+    15: 7  # traffic light -> sign
+}
+
+REDUCED_Label_to_SYNTHIA_Color = {
+    0: (0, 0, 0),  # void
+    1: (128, 128, 128),  # sky
+    2: (128, 0, 0),  # building
+    3: (128, 64, 128),  # road
+    4: (0, 0, 192),  # sidewalk
+    5: (64, 64, 128),  # fence
+    6: (128, 128, 0),  # vegetation
+    7: (192, 192, 128),  # sign
+    8: (64, 0, 128),  # car
+    9: (64, 64, 0),  # person
+    10: (0, 172, 0),  # lanemarking
 }
 
 CITYSCAPES_Label_to_CITYSCAPES_Color = {
@@ -137,7 +170,9 @@ color_dicts = {'SYNTHIA_Color_to_SYNTHIA_Label': (SYNTHIA_Color_to_SYNTHIA_Label
                'SYNTHIA_Label_to_SYNTHIA_Color': (SYNTHIA_Label_to_SYNTHIA_Color, True),
                'CITYSCAPES_Label_to_CITYSCAPES_Color': (CITYSCAPES_Label_to_CITYSCAPES_Color, True),
                'CITYSCAPES_Color_to_SYNTHIA_Label': (CITYSCAPES_Color_to_SYNTHIA_Label, False),
-               'CITYSCAPES_Color_to_SYNTHIA_Color': (CITYSCAPES_Color_to_SYNTHIA_Color, True)}
+               'CITYSCAPES_Color_to_SYNTHIA_Color': (CITYSCAPES_Color_to_SYNTHIA_Color, True),
+               'SYNTHIA_Label_to_REDUCED_Label': (SYNTHIA_Label_to_REDUCED_Label, False),
+               'REDUCED_Label_to_SYNTHIA_Color': (REDUCED_Label_to_SYNTHIA_Color, True)}
 
 
 @click.command()
