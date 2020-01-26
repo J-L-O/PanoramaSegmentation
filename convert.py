@@ -67,6 +67,25 @@ SYNTHIA_Label_to_SYNTHIA_Color = {
     15: (0, 128, 128)  # traffic light
 }
 
+SYNTHIA_Color_to_REDUCED_Label = {
+    (20, 215, 197): 0,  # void -> void
+    (207, 248, 132): 1,  # sky -> sky
+    (183, 244, 155): 2,  # building -> building
+    (144, 71, 111): 3,  # road -> road
+    (128, 48, 71): 4,  # sidewalk -> sidewalk
+    (50, 158, 75): 5,   # fence -> fence
+    (241, 169, 37): 6,  # vegetation -> vegetation
+    (222, 181, 51): 7,  # pole -> sign
+    (244, 104, 161): 8,  # car -> car
+    (31, 133, 226): 7,  # traffic sign -> sign
+    (204, 47, 7): 9,  # pedestrian -> person
+    (170, 252, 0): 9,   # bicycle -> person
+    (32, 166, 124): 10,   # lanemarking -> lanemarking
+    (122, 113, 97): 0,  # void -> void
+    (46, 229, 72): 0,   # void -> void
+    (250, 163, 41): 7  # traffic light -> sign
+}
+
 SYNTHIA_Label_to_REDUCED_Label = {
     0: 0,  # void -> void
     1: 1,  # sky -> sky
@@ -172,7 +191,8 @@ color_dicts = {'SYNTHIA_Color_to_SYNTHIA_Label': (SYNTHIA_Color_to_SYNTHIA_Label
                'CITYSCAPES_Color_to_SYNTHIA_Label': (CITYSCAPES_Color_to_SYNTHIA_Label, False),
                'CITYSCAPES_Color_to_SYNTHIA_Color': (CITYSCAPES_Color_to_SYNTHIA_Color, True),
                'SYNTHIA_Label_to_REDUCED_Label': (SYNTHIA_Label_to_REDUCED_Label, False),
-               'REDUCED_Label_to_SYNTHIA_Color': (REDUCED_Label_to_SYNTHIA_Color, True)}
+               'REDUCED_Label_to_SYNTHIA_Color': (REDUCED_Label_to_SYNTHIA_Color, True),
+               'SYNTHIA_Color_to_REDUCED_Label': (SYNTHIA_Color_to_REDUCED_Label, False)}
 
 
 @click.command()
