@@ -25,14 +25,14 @@ def train_pspnet_101(images, labels, model, width, height):
 
     print('Start training')
 
-    checkpoint_directory = f'./checkpoints/pspnet101_{width}x{height}'
+    checkpoint_directory = f'./checkpoints/{model}_{width}x{height}'
     if not os.path.exists(checkpoint_directory):
         os.makedirs(checkpoint_directory)
 
     segmentation_model.train(
         train_images=images,
         train_annotations=labels,
-        checkpoints_path=f'{checkpoint_directory}/pspnet101_{width}x{height}', epochs=10, batch_size=1
+        checkpoints_path=f'{checkpoint_directory}/{model}_{width}x{height}', epochs=10, batch_size=1
     )
 
     return segmentation_model
