@@ -41,8 +41,9 @@ def predict_pretrained_croppped(model, inp, out_fname, box=(0, 110, 3340, 650)):
 @click.option('--images', '-i', default='./SYNTHIA-PANO/RGB/seqs02_fall/', help='The folder containing the images.', type=click.Path(exists=True))
 @click.option('--predictions', '-p', default='./SYNTHIA-PANO/PREDICTIONS/seqs02_fall/', help='Where to store the predicted segmentation.', type=click.Path(exists=True))
 @click.option('--pretrained/--from-checkpoint', default=True, help='Whether or not to use a pretrained model.')
+@click.option('--entire_image/--split_image', default=True, help='Whether to predict the entire image at once or to split it up instead.')
 @click.option('--checkpoint_dir', help='Location of the model checkpoints. Only used with option --from-checkpoint.', type=click.Path(exists=False))
-def predict(images, predictions, pretrained, checkpoint_dir):
+def predict(images, predictions, pretrained, entire_image, checkpoint_dir):
 
     if pretrained:
         model = pspnet_101_cityscapes()  # load the pretrained model trained on Cityscapes dataset
@@ -53,7 +54,10 @@ def predict(images, predictions, pretrained, checkpoint_dir):
 
     for file in files:
         name, ext = splitext(file)
-        predict_pretrained_standard(model, inp=f'{images}{file}', out_fname=f'{predictions}{name}.png')
+        if entire_image:
+            predict_pretrained_standard(model, inp=f'{images}{file}', out_fname=f'{predictions}{name}.png')
+        else:
+            predict_pretrained_split(model, inp=f'{images}{file}', out_fname=f'{predictions}{name}.png')
 
 
 if __name__ == '__main__':
