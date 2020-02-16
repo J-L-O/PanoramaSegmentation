@@ -1,7 +1,7 @@
 import os
 
 import click
-from keras_segmentation.models.pspnet import pspnet_101
+from keras_segmentation.models.pspnet import pspnet_101, resnet50_pspnet
 from keras_segmentation.models.segnet import resnet50_segnet
 from keras_segmentation.models.unet import resnet50_unet
 
@@ -20,6 +20,8 @@ def train_pspnet_101(images, labels, model, width, height):
         segmentation_model = resnet50_unet(n_classes=16, input_width=width, input_height=height)
     elif model == 'resnet50_segnet':
         segmentation_model = resnet50_segnet(n_classes=16, input_width=width, input_height=height)
+    elif model == 'resnet50_pspnet':
+        segmentation_model = resnet50_pspnet(n_classes=16, input_width=width, input_height=height)
     else:
         return None
 
