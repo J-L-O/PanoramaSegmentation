@@ -1,5 +1,5 @@
 from os import listdir
-from os.path import isfile, join, normpath
+from os.path import isfile, join, normpath, splitext
 
 import click
 from PIL import Image
@@ -53,10 +53,11 @@ def predict(images, predictions, pretrained, entire_image, checkpoint_dir):
     files = [f for f in listdir(images) if isfile(join(images, f))]
 
     for file in files:
+        name, ext = splitext(file)
         if entire_image:
-            predict_pretrained_standard(model, inp=f'{images}{file}', out_fname=f'{predictions}{file}')
+            predict_pretrained_standard(model, inp=f'{images}{file}', out_fname=f'{predictions}{name}.png')
         else:
-            predict_pretrained_split(model, inp=f'{images}{file}', out_fname=f'{predictions}{file}')
+            predict_pretrained_split(model, inp=f'{images}{file}', out_fname=f'{predictions}{name}.png')
 
 
 if __name__ == '__main__':
