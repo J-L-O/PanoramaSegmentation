@@ -12,7 +12,8 @@ from keras_segmentation.models.unet import resnet50_unet
 @click.option('--model', '-m', default='pspnet_101', help='The model to train.', type=str)
 @click.option('--width', '-w', default=835, help='The image width.', type=int)
 @click.option('--height', '-h', default=190, help='The image height.', type=int)
-def train(images, labels, model, width, height):
+@click.option('--name', '-n', default='', help='Additional name string.', type=str)
+def train(images, labels, model, width, height, name):
 
     if model == 'pspnet_101':
         segmentation_model = pspnet_101(n_classes=16, input_width=width, input_height=height)
@@ -34,7 +35,7 @@ def train(images, labels, model, width, height):
     segmentation_model.train(
         train_images=images,
         train_annotations=labels,
-        checkpoints_path=f'{checkpoint_directory}/{model}_{width}x{height}', epochs=10, batch_size=1
+        checkpoints_path=f'{checkpoint_directory}/{model}_{width}x{height}_{name}', epochs=10, batch_size=1
     )
 
     return segmentation_model
