@@ -35,7 +35,7 @@ def train(images, labels, model, width, height, name):
     segmentation_model.train(
         train_images=images,
         train_annotations=labels,
-        checkpoints_path=f'{checkpoint_directory}/{model}_{width}x{height}_{name}', epochs=10, batch_size=1
+        checkpoints_path=f'{checkpoint_directory}/{model}_{width}x{height}{name}', epochs=10, batch_size=1
     )
 
     return segmentation_model
