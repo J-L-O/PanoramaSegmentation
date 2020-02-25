@@ -28,7 +28,7 @@ def train(images, labels, model, width, height, name):
 
     print('Start training')
 
-    checkpoint_directory = f'./checkpoints/{model}_{width}x{height}'
+    checkpoint_directory = f'./checkpoints/{model}_{width}x{height}{name}'
     if not os.path.exists(checkpoint_directory):
         os.makedirs(checkpoint_directory)
 
