@@ -8,9 +8,9 @@ from keras_segmentation.predict import evaluate_from_files
 @click.option('--n_classes', '-gt', default=16, help='The number of classes.', type=int)
 def evaluate(predictions, ground_truth, n_classes):
 
-    frequency_weighted_IU, mean_IU, cl_wise_score = evaluate_from_files(predictions, ground_truth, n_classes)
+    frequency_weighted_IoU, mean_IoU, cl_wise_score = evaluate_from_files(predictions, ground_truth, n_classes)
 
-    print(f'frequency_weighted_IU: {frequency_weighted_IU}, mean_IU: {mean_IU}, class_wise_IU: {cl_wise_score}')
+    print(f'frequency_weighted_IU: {frequency_weighted_IoU}, mean_IU: {mean_IoU}, class_wise_IU: {cl_wise_score}')
 
 
 if __name__ == '__main__':
