@@ -6,8 +6,8 @@ from PIL import Image, ImageFilter
 
 
 @click.command()
-@click.option('--input', '-i', default='./SYNTHIA-PANO/PREDICTIONS/seqs02_fall/', help='The folder containing the input images.', type=click.Path(exists=True))
-@click.option('--output', '-o', default='./SYNTHIA-PANO/PREDICTIONS_Converted_Labels/seqs02_fall/', help='Where to store the converted images.', type=click.Path(exists=True))
+@click.option('--input', '-i', help='The folder containing the input images.', type=click.Path(exists=True))
+@click.option('--output', '-o', help='Where to store the converted images.', type=click.Path(exists=True))
 def remove_small_objects(input, output):
     files = [f for f in listdir(input) if isfile(join(input, f))]
 

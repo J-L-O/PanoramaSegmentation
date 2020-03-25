@@ -196,8 +196,8 @@ color_dicts = {'SYNTHIA_Color_to_SYNTHIA_Label': (SYNTHIA_Color_to_SYNTHIA_Label
 
 
 @click.command()
-@click.option('--input', '-i', default='./SYNTHIA-PANO/PREDICTIONS/seqs02_fall/', help='The folder containing the input images.', type=click.Path(exists=True))
-@click.option('--output', '-o', default='./SYNTHIA-PANO/PREDICTIONS_Converted_Labels/seqs02_fall/', help='Where to store the converted images.', type=click.Path(exists=True))
+@click.option('--input', '-i', help='The folder containing the input images.', type=click.Path(exists=True))
+@click.option('--output', '-o', help='Where to store the converted images.', type=click.Path(exists=True))
 @click.option('--conversion', help='Which conversion shall be be applied.', type=str)
 def convert(input, output, conversion):
     files = [f for f in listdir(input) if isfile(join(input, f))]
