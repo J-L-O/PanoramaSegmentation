@@ -7,14 +7,14 @@ import numpy as np
 from keras_segmentation.predict import model_from_checkpoint_path
 from keras_segmentation.pretrained import pspnet_101_cityscapes
 
-from convert import convert_colors, CITYSCAPES_Label_to_CITYSCAPES_Color
+from util.convert import convert_colors, CITYSCAPES_Label_to_CITYSCAPES_Color
 
 
-def predict_pretrained_standard(model, inp, out_fname):
+def predict_standard(model, inp, out_fname):
     model.predict_segmentation(inp, out_fname)
 
 
-def predict_pretrained_split(model, inp, out_fname, split_count=4):
+def predict_split(model, inp, out_fname, split_count=4):
     image = Image.open(inp)
     out_image = Image.new("RGB", (image.width, image.height))
 
@@ -24,16 +24,6 @@ def predict_pretrained_split(model, inp, out_fname, split_count=4):
         prediction = model.predict_segmentation(np.array(image.crop(box)), None)
         out_image.paste(convert_colors(prediction, CITYSCAPES_Label_to_CITYSCAPES_Color, True).resize((int(image.width / split_count), image.height)), box[0:2])
 
-    out_image.save(out_fname)
-
-
-def predict_pretrained_croppped(model, inp, out_fname, box=(0, 110, 3340, 650)):
-    image = Image.open(inp)
-    out_image = Image.new("RGB", (image.width, image.height))
-
-    prediction = model.predict_segmentation(np.array(image.crop(box)), None)
-
-    out_image.paste(convert_colors(prediction, CITYSCAPES_Label_to_CITYSCAPES_Color, True).resize((box[2] - box[0], box[3] - box[1])), box[0:2])
     out_image.save(out_fname)
 
 
@@ -55,9 +45,9 @@ def predict(images, predictions, pretrained, entire_image, checkpoint_dir):
     for file in files:
         name, ext = splitext(file)
         if entire_image:
-            predict_pretrained_standard(model, inp=f'{images}{file}', out_fname=f'{predictions}{name}.png')
+            predict_standard(model, inp=f'{images}{file}', out_fname=f'{predictions}{name}.png')
         else:
-            predict_pretrained_split(model, inp=f'{images}{file}', out_fname=f'{predictions}{name}.png')
+            predict_split(model, inp=f'{images}{file}', out_fname=f'{predictions}{name}.png')
 
 
 if __name__ == '__main__':

@@ -7,12 +7,12 @@ from keras_segmentation.models.unet import resnet50_unet
 
 
 @click.command()
-@click.option('--images', '-i', default='./SYNTHIA-PANO/RGB/seqs04_fall/', help='The folder containing the images.', type=click.Path(exists=True))
-@click.option('--labels', '-l', default='./SYNTHIA-PANO/LABELS/seqs04_fall/', help='The folder containing the ground truth segmentation.', type=click.Path(exists=True))
+@click.option('--images', '-i', help='The folder containing the images.', type=click.Path(exists=True))
+@click.option('--labels', '-l', help='The folder containing the ground truth segmentation.', type=click.Path(exists=True))
 @click.option('--model', '-m', default='pspnet_101', help='The model to train.', type=str)
 @click.option('--width', '-w', default=835, help='The image width.', type=int)
 @click.option('--height', '-h', default=190, help='The image height.', type=int)
-@click.option('--name', '-n', default='', help='Additional name string.', type=str)
+@click.option('--name', '-n', default='', help='Additional name string to distinguish between runs.', type=str)
 def train(images, labels, model, width, height, name):
 
     if model == 'pspnet_101':
